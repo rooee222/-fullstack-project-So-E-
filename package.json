@@ -1,0 +1,14 @@
+{
+  "name": "book-swap-app",
+  "version": "1.0.0",
+  "description": "Sprint 1 scaffold for Book and Record Swap",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "pug": "^3.0.2"
+  }
+}
