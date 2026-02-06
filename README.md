@@ -1,7 +1,7 @@
 # Sharing Community App
 
 ## Module
-Software Engineering – CMP-N204-0
+Software Engineering – CMP-N204-0. hello
 
 ## Theme
 Sharing, exchange and building community
