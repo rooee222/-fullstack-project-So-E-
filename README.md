@@ -17,7 +17,7 @@ co-operation, reduce waste, and support communities without financial exchange.
 Our application allows users to:
 - View and share items with photos, descriptions, and categories
 - Connect with other users in the community
-- Track personal and community impact over time
+- Track personal and community impact over time.
 
 The project aligns with the 2026 module theme by addressing real-world problems such as waste reduction and fostering community support.
 
