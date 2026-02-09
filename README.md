@@ -41,22 +41,22 @@ The project aligns with the 2026 module theme by addressing real-world problems 
 Project Links
 
 GitHub Repository: https://github.com/rooee222/fullstack-project-So-E-
-Task Board (Kanban): [Add your GitHub Project link here]
-Team Name: Zone Z
-
+Task Board (Kanban): https://github.com/users/akshaykr1235-gif/projects/1
 
 Project Structure
-📁 fullstack-project/
-├── 📁 app/                  # Application files
-├── 📁 static/               # CSS, images, JavaScript
-├── 📁 views/                # PUG templates
-├── 📁 services/             # Database connection (db.js)
-├── 📄 app.js                # Main server file
-├── 📄 Dockerfile            # Docker configuration
-├── 📄 docker-compose.yml    # Docker Compose setup
-├── 📄 package.json          # Node.js dependencies
-├── 📄 .gitignore            # Git ignore rules
-└── 📄 README.md             # This file
+fullstack-project/
+│
+├── app/                      # Application files
+├── static/                   # CSS, images, JavaScript
+├── views/                    # PUG templates
+├── services/                 # Database connection (db.js)
+│
+├── app.js                    # Main server file
+├── Dockerfile                # Docker configuration
+├── docker-compose.yml        # Docker Compose setup
+├── package.json              # Node.js dependencies
+├── .gitignore                # Git ignore rules
+└── README.md                 # This file
 
 
 Setup Instructions
@@ -67,11 +67,9 @@ Git installed
 Node.js (optional, for local development)
 
 Steps to Run
-
-Clone the repository:
-
-bash   git clone https://github.com/rooee222/fullstack-project-So-E-.git
-   cd fullstack-project-So-E-
+1. Clone the repository:
+bashgit clone https://github.com/rooee222/fullstack-project-So-E-.git
+cd fullstack-project-So-E-
 
 Build and run with Docker:
 
