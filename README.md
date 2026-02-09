@@ -66,5 +66,45 @@ Docker Desktop installed
 Git installed
 Node.js (optional, for local development)
 
+Steps to Run
+
+Clone the repository:
+
+bash   git clone https://github.com/rooee222/fullstack-project-So-E-.git
+   cd fullstack-project-So-E-
+
+Build and run with Docker:
+
+bash   docker compose up --build
+
+Open your browser and navigate to:
+
+   http://localhost:3000
+
+To stop the application:
+
+bash   docker compose down
+
+Sprint Progress
+
+✅ Sprint 1: Project setup, GitHub repository, Docker environment, team formation
+🔄 Sprint 2: Requirements and specifications (Coming soon)
+⏳ Sprint 3: Initial development
+⏳ Sprint 4: MVP completion and CI/CD
+
+
+Development Workflow
+We follow the Scrum methodology with weekly stand-ups and sprint reviews.
+
+Version Control: Git & GitHub
+Task Management: GitHub Projects (Kanban board)
+Code Reviews: Weekly in lab sessions
+Deployment: Docker containers
+
+
+Contact
+For questions or issues, please contact any team member through GitHub or raise an issue in this repository.
+
+Team: Zone Z
 
 
