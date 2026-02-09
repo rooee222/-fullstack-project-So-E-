@@ -74,7 +74,7 @@ cd fullstack-project-So-E-
 
 Build and run with Docker:
 
-bash   docker compose up --build
+bash  docker compose up --build
 
 Open your browser and navigate to:
 
@@ -86,13 +86,13 @@ bash   docker compose down
 
 Sprint Progress
 
-✅ Sprint 1: Project setup, GitHub repository, Docker environment, team formation
+ Sprint 1: Project setup, GitHub repository, Docker environment, team formation
 
-🔄 Sprint 2: Requirements and specifications (Coming soon)
+ Sprint 2: Requirements and specifications (Coming soon)
 
-⏳ Sprint 3: Initial development
+ Sprint 3: Initial development
 
-⏳ Sprint 4: MVP completion and CI/CD
+ Sprint 4: MVP completion and CI/CD
 
 
 Development Workflow
