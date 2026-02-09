@@ -41,6 +41,7 @@ The project aligns with the 2026 module theme by addressing real-world problems 
 Project Links
 
 GitHub Repository: https://github.com/rooee222/fullstack-project-So-E-
+
 Task Board (Kanban): https://github.com/users/akshaykr1235-gif/projects/1
 
 Project Structure
