@@ -38,8 +38,33 @@ The project aligns with the 2026 module theme by addressing real-world problems 
 
 > Each team member has contributed at least one commit to this repository.
 
-## How to Run the Project
-Make sure Docker is installed.
+Project Links
 
-```bash
-docker compose up --build
+GitHub Repository: https://github.com/rooee222/fullstack-project-So-E-
+Task Board (Kanban): [Add your GitHub Project link here]
+Team Name: Zone Z
+
+
+Project Structure
+📁 fullstack-project/
+├── 📁 app/                  # Application files
+├── 📁 static/               # CSS, images, JavaScript
+├── 📁 views/                # PUG templates
+├── 📁 services/             # Database connection (db.js)
+├── 📄 app.js                # Main server file
+├── 📄 Dockerfile            # Docker configuration
+├── 📄 docker-compose.yml    # Docker Compose setup
+├── 📄 package.json          # Node.js dependencies
+├── 📄 .gitignore            # Git ignore rules
+└── 📄 README.md             # This file
+
+
+Setup Instructions
+Prerequisites
+
+Docker Desktop installed
+Git installed
+Node.js (optional, for local development)
+
+
+
