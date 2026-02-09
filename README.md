@@ -3,7 +3,7 @@
 ## Module Information
 - **Module Title:** Software Engineering  
 - **Module Code:** CMP-N204-0  
-- **Programme:** BSc Computer Science / Software Engineering  
+- **Programme:** BSc Computer Science / Cyber Security
 - **Level:** 5  
 
 ## Project Theme
