@@ -65,12 +65,11 @@ Prerequisites
 
 Docker Desktop installed
 Git installed
-Node.js (optional, for local development)
+Node.js (for local development)
 
 Steps to Run
 1. Clone the repository:
-git clone https://github.com/rooee222/fullstack-project-So-E-.git
-
+bash git clone https://github.com/rooee222/fullstack-project-So-E-.git
 cd fullstack-project-So-E-
 
 Build and run with Docker:
