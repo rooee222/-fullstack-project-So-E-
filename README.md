@@ -42,7 +42,7 @@ Project Links
 
 GitHub Repository: https://github.com/rooee222/fullstack-project-So-E-
 
-Task Board (Kanban): https://github.com/users/akshaykr1235-gif/projects/1
+Task Board (Kanban): https://github.com/users/rooee222/projects/4
 
 Project Structure
 fullstack-project/
