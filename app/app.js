@@ -27,6 +27,10 @@ app.get("/user/:id", function(req, res) {
     res.send("User ID: " + req.params.id);
 });
 
+// creating dynamic route which where a user may request /student/:name/:id
+app.get("/student/:name/:id", function(req, res) {
+    res.send("Name: " + req.params.name + " ID: " + req.params.id);
+});
 
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
