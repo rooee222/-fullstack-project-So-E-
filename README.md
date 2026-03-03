@@ -55,7 +55,7 @@ fullstack-project
 ├── views/                    # PUG templates
 
 ├── services/                 # Database connection (db.js)
-│
+
 ├── app.js                    # Main server file
 
 ├── Dockerfile                # Docker configuration
