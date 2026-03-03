@@ -48,15 +48,23 @@ Project Structure
 fullstack-project/
 │
 ├── app/                      # Application files
+
 ├── static/                   # CSS, images, JavaScript
+
 ├── views/                    # PUG templates
+
 ├── services/                 # Database connection (db.js)
 │
 ├── app.js                    # Main server file
+
 ├── Dockerfile                # Docker configuration
+
 ├── docker-compose.yml        # Docker Compose setup
+
 ├── package.json              # Node.js dependencies
+
 ├── .gitignore                # Git ignore rules
+
 └── README.md                 # This file
 
 
