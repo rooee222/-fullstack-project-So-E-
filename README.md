@@ -87,11 +87,8 @@ bash   docker compose down
 Sprint Progress
 
  Sprint 1: Project setup, GitHub repository, Docker environment, team formation
-
- Sprint 2: Requirements and specifications (Coming soon)
-
- Sprint 3: Initial development
-
+ Sprint 2: Requirements and specifications 
+ Sprint 3: Initial development (Coming soon)
  Sprint 4: MVP completion and CI/CD
 
 
