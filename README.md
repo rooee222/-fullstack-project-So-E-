@@ -45,18 +45,27 @@ GitHub Repository: https://github.com/rooee222/fullstack-project-So-E-
 Task Board (Kanban): https://github.com/users/rooee222/projects/4
 
 Project Structure
-fullstack-project/
-│
+
+fullstack-project
+
 ├── app/                      # Application files
+
 ├── static/                   # CSS, images, JavaScript
+
 ├── views/                    # PUG templates
+
 ├── services/                 # Database connection (db.js)
-│
+
 ├── app.js                    # Main server file
+
 ├── Dockerfile                # Docker configuration
+
 ├── docker-compose.yml        # Docker Compose setup
+
 ├── package.json              # Node.js dependencies
+
 ├── .gitignore                # Git ignore rules
+
 └── README.md                 # This file
 
 
@@ -87,11 +96,11 @@ bash   docker compose down
 Sprint Progress
 
  Sprint 1: Project setup, GitHub repository, Docker environment, team formation
-
- Sprint 2: Requirements and specifications (Coming soon)
-
- Sprint 3: Initial development
-
+ 
+ Sprint 2: Requirements and specifications 
+ 
+ Sprint 3: Initial development (Coming soon)
+ 
  Sprint 4: MVP completion and CI/CD
 
 
