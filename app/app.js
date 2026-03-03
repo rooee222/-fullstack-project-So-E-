@@ -17,10 +17,10 @@ app.get("/", function(req, res) {
 
 //create a /roehampton route 
 app.get("/roehampton", function(req, res) {
-    console.log(req.url);
-    res.send("helloo roehampton"!);git
+    console.log(req.url)
+    let path = req.url;
+    res.send(path.substring(0,3))
 });
-
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
     // Assumes a table called test_table exists in your database
