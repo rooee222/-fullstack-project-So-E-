@@ -21,6 +21,13 @@ app.get("/roehampton", function(req, res) {
     let path = req.url;
     res.send(path.substring(0,3))
 });
+
+// create a dynamic route which where a user may request /user/:id 
+app.get("/user/:id", function(req, res) {
+    res.send("User ID: " + req.params.id);
+});
+
+
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
     // Assumes a table called test_table exists in your database
