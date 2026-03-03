@@ -12,7 +12,13 @@ const db = require('./services/db');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
-    res.send("good job");
+    res.send("hello zone-z");
+});
+
+//create a /roehampton route 
+app.get("/roehampton", function(req, res) {
+    console.log(req.url);
+    res.send("helloo roehampton");
 });
 
 // Create a route for testing the db
