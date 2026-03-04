@@ -54,6 +54,28 @@ app.get("/db_test", function(req, res) {
     });
 });
 
+// New route for db_test with id
+app.get("/db_test/:id", function(req, res) {
+    let id = req.params.id;
+    sql = `select * from test_table where id = ${id}`;
+    db.query(sql).then(results => {
+        console.log(results);
+        res.send(`
+            <h2>Student Details</h2>
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+                <tr>
+                    <td>${results[0].id}</td>
+                    <td>${results[0].name}</td>
+                </tr>
+            </table>
+        `)
+    });
+});
+
 // Create a route for /goodbye
 // Responds to a 'GET' request
 app.get("/goodbye", function(req, res) {
