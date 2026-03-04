@@ -19,7 +19,10 @@ app.get("/", function(req, res) {
 app.get("/roehampton", function(req, res) {
     console.log(req.url)
     let path = req.url;
-    res.send(path.substring(0,3))
+    let arr = path.split('');
+    arr.splice(0, 1);
+    let reversed = arr.reverse().join('');
+    res.send(reversed);
 });
 
 // create a dynamic route which where a user may request /user/:id 
@@ -43,6 +46,16 @@ app.get("/student/:name/:id", function(req, res) {
     `);
 });
 
+//Creating dynamic route where the user may request /number/:n where n is any number using loop
+app.get("/number/:n", function(req, res) {
+    let n = req.params.n;
+    let table = '<table border="1">';
+    for (var i = 0; i <= n; i++) {
+        table += '<tr><td>' + i + '</td></tr>';
+    }
+    table += '</table>';
+    res.send(table);
+});
 
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
