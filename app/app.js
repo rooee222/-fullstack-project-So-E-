@@ -1,3 +1,8 @@
+// Get the models
+const { Student } = require("./models/student");
+const { Programme } = require("./models/programme");
+const { Module } = require("./models/module")
+
 // Import express.js
 const express = require("express");
 
@@ -134,11 +139,13 @@ app.get("/all-students-formatted", function(req, res) {
 });
 
 //Create  /student:id route
-app.get("/student-single/:id", function(req, res) {
-    let id = req.params.id;
-    db.query('select * from Students where id = ?', [id]).then(results => {
-        res.render('student-single', {data: results[0]});
-    });
+app.get("/student-single/:id", async function (req, res) {
+    var stId = req.params.id;
+    var student = new Student(stId);
+    await student.getStudentName();
+    await student.getStudentProgramme();
+    await student.getStudentModules();
+    res.render('student', {student: student});
 });
 
 //Independent Task 1 — All programmes as JSON
@@ -160,14 +167,12 @@ app.get("/all-programmes-formatted", function(req, res) {
 
 // route Task 3 — Single programme page
 //route /programme/:id
-app.get("/programme-single/:id", function(req, res) {
-    let id = req.params.id;
-    db.query('select * from Programmes where id = ?', [id]).then(results => {
-        let programme = results[0];
-        db.query('select * from Modules join Programme_Modules on Modules.code = Programme_Modules.module where Programme_Modules.programme = ?', [id]).then(moduleResults => {
-            res.render('programme-single', {programme: programme, modules: moduleResults});
-        });
-    });
+app.get("/programme-single/:id", async function (req, res) {
+    var pId = req.params.id;
+    var programme = new Programme(pId);
+    await programme.getProgrammeName();
+    await programme.getProgrammeModules();
+    res.render('programme', {programme: programme});
 });
 
 //Independent Task 4 — All modules as JSON  //route /modules
@@ -186,12 +191,11 @@ app.get("/all-modules-formatted", function(req, res) {
 });
 
  //route /module/:code
-app.get("/module-single/:code", function(req, res) {
-    let code = req.params.code;
-    db.query('select * from Modules where code = ?', [code]).then(results => {
-        let module = results[0];
-        res.render('module-single', {module: module});
-    });
+app.get("/module-single/:code", async function (req, res) {
+    var code = req.params.code;
+    var module = new Module(code);
+    await module.getModuleName();
+    res.render('module', {module: module});
 });
 
 // /about route
