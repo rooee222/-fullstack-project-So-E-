@@ -4,6 +4,10 @@ const express = require("express");
 // Create express app
 var app = express();
 
+// Use the Pug templating engine
+app.set('view engine', 'pug');
+app.set('views', './app/views');
+
 // Add static files location
 app.use(express.static("static"));
 
@@ -12,8 +16,10 @@ const db = require('./services/db');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
-    res.send("hello zone-z");
+    var test_data = ['one', 'two', 'three', 'four'];
+    res.render("index", {'title':'My index page', 'heading':'My heading', 'data':test_data});
 });
+
 
 //create a /roehampton route 
 app.get("/roehampton", function(req, res) {
@@ -119,30 +125,19 @@ app.get("/students", function(req, res) {
     });
 });
 
-//Provide an HTML formatted output listing all students in a table
-app.get("/students/html", function(req, res) {
-    db.query('select * from Students').then(results => {
-        let html = '<table border="1">';
-        html += '<tr><th>ID</th><th>Name</th></tr>';
-        for (var row of results) {
-            html += '<tr>';
-            html += '<td>' + row.id + '</td>';
-            html += '<td><a href="/student/' + row.id + '">' + row.name + '</a></td>';
-            html += '</tr>';
-        }
-        html += '</table>';
-        res.send(html);
+// /all-students-formatted route
+app.get("/all-students-formatted", function(req, res) {
+    var sql = 'select * from Students';
+    db.query(sql).then(results => {
+        res.render('all-students', {data: results});
     });
 });
 
-//Create a single-student page which lists a student name, their programme and their modules
-app.get("/student/:id", function(req, res) {
+//Create  /student:id route
+app.get("/student-single/:id", function(req, res) {
     let id = req.params.id;
     db.query('select * from Students where id = ?', [id]).then(results => {
-        let student = results[0];
-        let html = '<h1>' + student.name + '</h1>';
-        html += '<p>Student ID: ' + student.id + '</p>';
-        res.send(html);
+        res.render('student-single', {data: results[0]});
     });
 });
 
@@ -155,44 +150,22 @@ app.get("/programmes", function(req, res) {
 });
 
 //Independent Task 2 — Programmes HTML table
-//route /programmes/html
-app.get("/programmes/html", function(req, res) {
-    db.query('select * from Programmes').then(results => {
-        let html = '<table border="1">';
-        html += '<tr><th>ID</th><th>Name</th></tr>';
-        for (var row of results) {
-            html += '<tr>';
-            html += '<td>' + row.id + '</td>';
-            html += '<td><a href="/programme/' + row.id + '">' + row.name + '</a></td>';
-            html += '</tr>';
-        }
-        html += '</table>';
-        res.send(html);
+//route /programmes-formatted route
+app.get("/all-programmes-formatted", function(req, res) {
+    var sql = 'select * from Programmes';
+    db.query(sql).then(results => {
+        res.render('all-programmes', {data: results});
     });
 });
 
 // route Task 3 — Single programme page
 //route /programme/:id
-app.get("/programme/:id", function(req, res) {
+app.get("/programme-single/:id", function(req, res) {
     let id = req.params.id;
     db.query('select * from Programmes where id = ?', [id]).then(results => {
         let programme = results[0];
-        let html = '<h1>' + programme.name + '</h1>';
-        html += '<p>Programme ID: ' + programme.id + '</p>';
-        
-        // Get all modules for this programme
         db.query('select * from Modules join Programme_Modules on Modules.code = Programme_Modules.module where Programme_Modules.programme = ?', [id]).then(moduleResults => {
-            html += '<h2>Modules</h2>';
-            html += '<table border="1">';
-            html += '<tr><th>Code</th><th>Name</th></tr>';
-            for (var row of moduleResults) {
-                html += '<tr>';
-                html += '<td>' + row.code + '</td>';
-                html += '<td>' + row.name + '</td>';
-                html += '</tr>';
-            }
-            html += '</table>';
-            res.send(html);
+            res.render('programme-single', {programme: programme, modules: moduleResults});
         });
     });
 });
@@ -204,30 +177,24 @@ app.get("/modules", function(req, res) {
     });
 });
 
-//Independent Task 5 — Modules HTML table //route /modules/html
-app.get("/modules/html", function(req, res) {
-    db.query('select * from Modules').then(results => {
-        let html = '<table border="1">';
-        html += '<tr><th>Code</th><th>Name</th></tr>';
-        for (var row of results) {
-            html += '<tr>';
-            html += '<td>' + row.code + '</td>';
-            html += '<td><a href="/module/' + row.code + '">' + row.name + '</a></td>';
-            html += '</tr>';
-        }
-        html += '</table>';
-        res.send(html);
+ //route /modules/html
+app.get("/all-modules-formatted", function(req, res) {
+    var sql = 'select * from Modules';
+    db.query(sql).then(results => {
+        res.render('all-modules', {data: results});
     });
 });
 
-//Independent Task 6 — Single module page //route /module/:code
-app.get("/module/:code", function(req, res) {
+ //route /module/:code
+app.get("/module-single/:code", function(req, res) {
     let code = req.params.code;
     db.query('select * from Modules where code = ?', [code]).then(results => {
         let module = results[0];
-        let html = '<h1>' + module.name + '</h1>';
-        html += '<p>Module Code: ' + module.code + '</p>';
-        res.send(html);
+        res.render('module-single', {module: module});
     });
 });
 
+// /about route
+app.get("/about", function(req, res) {
+    res.render("about");
+}); 
