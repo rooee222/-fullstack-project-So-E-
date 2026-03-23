@@ -1,0 +1,10 @@
+extends layout
+block content
+    h1 #{listing.title}
+    p Category: #{listing.category}
+    p Posted by: 
+        a(href='/users/' + listing.userID) #{listing.username}
+    p Date posted: #{listing.createdAt}
+    p Description: #{listing.description}
+    br
+    a(href='/listings') Back to all listings

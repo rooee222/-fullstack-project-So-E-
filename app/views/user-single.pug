@@ -1,0 +1,22 @@
+extends layout
+block content
+    h1 #{user.username}'s Profile
+    p Email: #{user.email}
+    p Location: #{user.location}
+    p Member since: #{user.createdAt}
+
+    h2 Listings by #{user.username}
+    if listings.length === 0
+        p This user has no listings yet
+    else
+        table(border=1)
+            tr
+                th Title
+                th Category
+                th Date Posted
+            for item in listings
+                tr
+                    td
+                        a(href='/listings/' + item.listingID) #{item.title}
+                    td #{item.category}
+                    td #{item.createdAt}

@@ -1,0 +1,16 @@
+extends layout
+block content
+    h1 All Users
+    table(border=1)
+        tr
+            th ID
+            th Username
+            th Location
+            th Joined
+        for item in data
+            tr
+                td #{item.userID}
+                td
+                    a(href='/users/' + item.userID) #{item.username}
+                td #{item.location}
+                td #{item.createdAt}

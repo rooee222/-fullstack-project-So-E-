@@ -1,0 +1,31 @@
+extends layout
+block content
+    h1 Browse Listings
+
+    form(action='/listings' method='GET')
+        input(type='text' name='search' placeholder='Search listings...' value=search)
+        select(name='category')
+            option(value='') All Categories
+            option(value='Books') Books
+            option(value='Tools') Tools
+            option(value='Clothes') Clothes
+            option(value='Kitchen') Kitchen
+            option(value='Other') Other
+        button(type='submit') Search
+
+    if data.length === 0
+        p No listings found
+    else
+        table(border=1)
+            tr
+                th Title
+                th Category
+                th Posted By
+                th Date
+            for item in data
+                tr
+                    td
+                        a(href='/listings/' + item.listingID) #{item.title}
+                    td #{item.category}
+                    td #{item.username}
+                    td #{item.createdAt}
