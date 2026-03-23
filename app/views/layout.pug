@@ -1,11 +1,23 @@
 html
     head
         title CommunityShare
+        link(rel='stylesheet' href='/style.css')
     body
         nav
-            a(href='/') Home
-            |  | 
-            a(href='/listings') Browse Listings
-            |  | 
-            a(href='/users') Users
-        block content
+            a.logo(href='/')
+                img(src='/logo.png' alt='Logo')
+                | Community
+                span Share
+            .nav-links
+                a(href='/listings') Browse Listings
+                a(href='/users') Users
+                if session && session.loggedIn
+                    a.btn-primary(href='/listings/new') Post a Listing
+                    a(href='/my-listings') My Listings
+                    a(href='/messages') Messages
+                    a(href='/logout') Logout
+                else
+                    a(href='/login') Login
+                    a(href='/register') Register
+        .container
+            block content

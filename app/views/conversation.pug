@@ -1,0 +1,25 @@
+extends layout
+block content
+    h1.page-title Conversation with #{otherUser.username}
+    p(style='margin-bottom: 20px;') Regarding: 
+        a(href='/listings/' + listingID style='color: #2ecc71;') #{listingTitle}
+
+    if messages.length === 0
+        p No messages in this conversation yet.
+    else
+        each msg in messages
+            .conversation-bubble(class=(msg.senderID == session.uid ? 'mine' : ''))
+                .bubble-sender #{msg.senderName}
+                div #{msg.content}
+                .bubble-time #{new Date(msg.createdAt).toLocaleString()}
+
+    .form-container(style='margin-top: 20px;')
+        h3 Reply
+        form(action='/messages/reply' method='POST')
+            input(type='hidden' name='receiverID' value=otherUserID)
+            input(type='hidden' name='listingID' value=listingID)
+            .form-group
+                textarea(name='content' placeholder='Type your reply...' rows='3' required)
+            button.btn.btn-green(type='submit') Send Reply
+    br
+    a(href='/messages') ← Back to Messages

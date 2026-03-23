@@ -1,0 +1,29 @@
+extends layout
+block content
+    h1.page-title Post a New Listing
+
+    .form-container
+        form(action='/listings/new' method='POST' enctype='multipart/form-data')
+            .form-group
+                label Title
+                input(type='text' name='title' placeholder='What are you sharing?' required)
+            .form-group
+                label Description
+                textarea(name='description' placeholder='Describe the item...' required)
+            .form-group
+                label Category
+                select(name='category')
+                    option(value='Books') Books
+                    option(value='Tools') Tools
+                    option(value='Clothes') Clothes
+                    option(value='Kitchen') Kitchen
+                    option(value='Accessories') Accessories
+                    option(value='Shoes') Shoes
+                    option(value='Bags') Bags
+                    option(value='Other') Other
+            .form-group
+                label Image
+                input(type='file' name='image' accept='image/*')
+            button.btn.btn-green(type='submit') Post Listing
+        br
+        a(href='/listings') Cancel

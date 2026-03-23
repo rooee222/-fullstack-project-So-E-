@@ -1,7 +1,12 @@
 extends layout
 block content
-    h1 Welcome to CommunityShare
-    p Share items with your local community
-    a(href='/listings') Browse Listings
-    |  | 
-    a(href='/users') View Users
+    .hero
+        h1 Welcome to CommunityShare
+        p Share more. Waste less. Connect local.
+        .hero-buttons
+            if session && session.loggedIn
+                a.btn-white(href='/listings') Browse Listings
+                a.btn-outline(href='/listings/new') Post a Listing
+            else
+                a.btn-white(href='/login') Login
+                a.btn-outline(href='/register') Register

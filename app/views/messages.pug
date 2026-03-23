@@ -1,0 +1,35 @@
+extends layout
+block content
+    h1.page-title Messages
+
+    h2(style='margin-bottom: 15px;') Inbox
+    if inbox.length === 0
+        p No messages received yet.
+    else
+        each msg in inbox
+            .message-box(class=msg.isRead ? '' : 'unread')
+                .msg-header
+                    span
+                        strong #{msg.senderName}
+                        |  about 
+                        em #{msg.listingTitle}
+                    span #{new Date(msg.createdAt).toLocaleDateString()}
+                .msg-content #{msg.content}
+                div(style='margin-top: 8px;')
+                    a.btn.btn-outline-green.btn-small(href='/messages/conversation/' + msg.senderID + '/' + msg.listingID) View / Reply
+
+    h2(style='margin: 30px 0 15px;') Sent
+    if sent.length === 0
+        p No messages sent yet.
+    else
+        each msg in sent
+            .message-box
+                .msg-header
+                    span
+                        strong To: #{msg.receiverName}
+                        |  about 
+                        em #{msg.listingTitle}
+                    span #{new Date(msg.createdAt).toLocaleDateString()}
+                .msg-content #{msg.content}
+                div(style='margin-top: 8px;')
+                    a.btn.btn-outline-green.btn-small(href='/messages/conversation/' + msg.receiverID + '/' + msg.listingID) View Thread

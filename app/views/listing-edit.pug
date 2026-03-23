@@ -1,0 +1,32 @@
+extends layout
+block content
+    h1.page-title Edit Listing
+
+    .form-container
+        form(action='/listings/' + listing.listingID + '/edit' method='POST' enctype='multipart/form-data')
+            .form-group
+                label Title
+                input(type='text' name='title' value=listing.title required)
+            .form-group
+                label Description
+                textarea(name='description' required) #{listing.description}
+            .form-group
+                label Category
+                select(name='category')
+                    option(value='Books' selected=(listing.category === 'Books')) Books
+                    option(value='Tools' selected=(listing.category === 'Tools')) Tools
+                    option(value='Clothes' selected=(listing.category === 'Clothes')) Clothes
+                    option(value='Kitchen' selected=(listing.category === 'Kitchen')) Kitchen
+                    option(value='Accessories' selected=(listing.category === 'Accessories')) Accessories
+                    option(value='Shoes' selected=(listing.category === 'Shoes')) Shoes
+                    option(value='Bags' selected=(listing.category === 'Bags')) Bags
+                    option(value='Other' selected=(listing.category === 'Other')) Other
+            .form-group
+                label Upload New Image (optional)
+                input(type='file' name='image' accept='image/*')
+                if listing.imageURL
+                    p(style='margin-top: 8px; color: #777;') Current image:
+                    img(src=listing.imageURL style='max-width: 200px; border-radius: 6px; margin-top: 5px;')
+            button.btn.btn-green(type='submit') Update Listing
+        br
+        a(href='/my-listings') Cancel

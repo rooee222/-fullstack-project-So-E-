@@ -1,0 +1,16 @@
+extends layout
+block content
+    .auth-container
+        .auth-form
+            h1 Login
+            form(action='/login' method='POST')
+                .form-group
+                    label Email
+                    input(type='email' name='email' placeholder='your@email.com' required)
+                .form-group
+                    label Password
+                    input(type='password' name='password' placeholder='Enter password' required)
+                button.btn.btn-green(type='submit') Sign In
+            .auth-link
+                | Don't have an account? 
+                a(href='/register') Register

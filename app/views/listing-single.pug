@@ -1,10 +1,51 @@
 extends layout
 block content
-    h1 #{listing.title}
-    p Category: #{listing.category}
-    p Posted by: 
-        a(href='/users/' + listing.userID) #{listing.username}
-    p Date posted: #{listing.createdAt}
-    p Description: #{listing.description}
+    .listing-detail
+        if listing.imageURL
+            img(src=listing.imageURL alt=listing.title)
+        .detail-body
+            h1 #{listing.title}
+            .detail-meta
+                span.category-badge #{listing.category}
+                |  Posted by 
+                a(href='/users/' + listing.userID) #{listing.username}
+                |  — #{new Date(listing.createdAt).toLocaleDateString()}
+            
+            if query && query.messageSent
+                .alert.alert-success Your message has been sent!
+            if query && query.reported
+                .alert.alert-success Thank you. Your report has been submitted.
+            if query && query.alreadyReported
+                .alert.alert-warning You have already reported this listing.
+
+            p.detail-description #{listing.description}
+
+            if session && session.loggedIn && session.uid != listing.userID
+                .detail-actions
+                    div(style='flex: 1;')
+                        h3 Contact Owner
+                        form(action='/messages/send' method='POST')
+                            input(type='hidden' name='receiverID' value=listing.userID)
+                            input(type='hidden' name='listingID' value=listing.id)
+                            .form-group
+                                textarea(name='content' placeholder='Write your message...' rows='3' required)
+                            button.btn.btn-green(type='submit') Send Message
+                    div
+                        h3 Report Listing
+                        form(action='/listings/' + listing.id + '/report' method='POST')
+                            .form-group
+                                select(name='reason' required)
+                                    option(value='') -- Select a reason --
+                                    option(value='Inappropriate content') Inappropriate content
+                                    option(value='Spam or scam') Spam or scam
+                                    option(value='Offensive language') Offensive language
+                                    option(value='Incorrect category') Incorrect category
+                                    option(value='Other') Other
+                            button.btn.btn-red.btn-small(type='submit') Report
+
+            if session && session.loggedIn && session.uid == listing.userID
+                div(style='margin-top: 15px;')
+                    a.btn.btn-outline-green(href='/listings/' + listing.id + '/edit') Edit this listing
+
     br
-    a(href='/listings') Back to all listings
+    a(href='/listings') ← Back to all listings

@@ -1,31 +1,33 @@
 extends layout
 block content
-    h1 Browse Listings
+    h1.page-title Browse Listings
 
-    form(action='/listings' method='GET')
+    form.search-bar(action='/listings' method='GET')
         input(type='text' name='search' placeholder='Search listings...' value=search)
         select(name='category')
             option(value='') All Categories
-            option(value='Books') Books
-            option(value='Tools') Tools
-            option(value='Clothes') Clothes
-            option(value='Kitchen') Kitchen
-            option(value='Other') Other
+            option(value='Books' selected=(category === 'Books')) Books
+            option(value='Tools' selected=(category === 'Tools')) Tools
+            option(value='Clothes' selected=(category === 'Clothes')) Clothes
+            option(value='Kitchen' selected=(category === 'Kitchen')) Kitchen
+            option(value='Accessories' selected=(category === 'Accessories')) Accessories
+            option(value='Shoes' selected=(category === 'Shoes')) Shoes
+            option(value='Bags' selected=(category === 'Bags')) Bags
+            option(value='Other' selected=(category === 'Other')) Other
         button(type='submit') Search
 
     if data.length === 0
-        p No listings found
+        p No listings found.
     else
-        table(border=1)
-            tr
-                th Title
-                th Category
-                th Posted By
-                th Date
-            for item in data
-                tr
-                    td
-                        a(href='/listings/' + item.listingID) #{item.title}
-                    td #{item.category}
-                    td #{item.username}
-                    td #{item.createdAt}
+        .cards-grid
+            each item in data
+                .card
+                    if item.imageURL
+                        img(src=item.imageURL alt=item.title)
+                    else
+                        .no-image No Image
+                    .card-body
+                        h3
+                            a(href='/listings/' + item.listingID) #{item.title}
+                        span.category-badge #{item.category}
+                        .card-meta Posted by #{item.username} — #{new Date(item.createdAt).toLocaleDateString()}

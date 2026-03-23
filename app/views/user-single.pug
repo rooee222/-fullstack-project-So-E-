@@ -1,22 +1,26 @@
 extends layout
 block content
-    h1 #{user.username}'s Profile
-    p Email: #{user.email}
-    p Location: #{user.location}
-    p Member since: #{user.createdAt}
+    .profile-card
+        h1 #{user.username}'s Profile
+        .profile-info
+            p Email: #{user.email}
+            if user.location
+                p Location: #{user.location}
+            p Member since: #{new Date(user.createdAt).toLocaleDateString()}
 
-    h2 Listings by #{user.username}
+    h2.page-title Listings by #{user.username}
     if listings.length === 0
-        p This user has no listings yet
+        p This user has no listings yet.
     else
-        table(border=1)
-            tr
-                th Title
-                th Category
-                th Date Posted
-            for item in listings
-                tr
-                    td
-                        a(href='/listings/' + item.listingID) #{item.title}
-                    td #{item.category}
-                    td #{item.createdAt}
+        .cards-grid
+            each item in listings
+                .card
+                    if item.imageURL
+                        img(src=item.imageURL alt=item.title)
+                    else
+                        .no-image No Image
+                    .card-body
+                        h3
+                            a(href='/listings/' + item.listingID) #{item.title}
+                        span.category-badge #{item.category}
+                        .card-meta #{new Date(item.createdAt).toLocaleDateString()}

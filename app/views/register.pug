@@ -1,0 +1,19 @@
+extends layout
+block content
+    .auth-container
+        .auth-form
+            h1 Register
+            form(action='/register' method='POST')
+                .form-group
+                    label Username
+                    input(type='text' name='username' placeholder='Choose a username' required)
+                .form-group
+                    label Email
+                    input(type='email' name='email' placeholder='your@email.com' required)
+                .form-group
+                    label Password
+                    input(type='password' name='password' placeholder='Min 8 characters' required)
+                button.btn.btn-green(type='submit') Sign Up
+            .auth-link
+                | Already have an account? 
+                a(href='/login') Login

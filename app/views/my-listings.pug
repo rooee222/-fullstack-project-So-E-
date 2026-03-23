@@ -1,0 +1,35 @@
+extends layout
+block content
+    h1.page-title My Listings
+
+    if listings.length === 0
+        p You haven't posted any listings yet.
+        a.btn.btn-green(href='/listings/new') Create your first listing
+    else
+        table.styled-table
+            thead
+                tr
+                    th Image
+                    th Title
+                    th Category
+                    th Status
+                    th Date
+                    th Actions
+            tbody
+                for item in listings
+                    tr
+                        td
+                            if item.imageURL
+                                img(src=item.imageURL style='width: 60px; height: 40px; object-fit: cover; border-radius: 4px;')
+                            else
+                                span -
+                        td
+                            a(href='/listings/' + item.listingID) #{item.title}
+                        td #{item.category}
+                        td #{item.status}
+                        td #{new Date(item.createdAt).toLocaleDateString()}
+                        td
+                            a.btn.btn-outline-green.btn-small(href='/listings/' + item.listingID + '/edit') Edit
+                            |  
+                            form(action='/listings/' + item.listingID + '/delete' method='POST' style='display:inline' onsubmit='return confirm("Are you sure you want to delete: ' + item.title + '?");')
+                                button.btn.btn-red.btn-small(type='submit') Delete
