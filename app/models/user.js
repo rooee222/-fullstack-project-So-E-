@@ -1,3 +1,4 @@
+// User authentication with bcrypt and session management - Amrita
 const db = require('../services/db');
 const bcrypt = require('bcryptjs');
 
