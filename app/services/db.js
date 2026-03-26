@@ -1,3 +1,4 @@
+// MySQL database connection and schema setup - Amrita
 require("dotenv").config();
 
 const mysql = require('mysql2/promise');
