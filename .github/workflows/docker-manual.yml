@@ -1,0 +1,18 @@
+name: Manual workflow for docker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-node:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check
+      run: echo "first job done!"
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
+      with:
+        node-version: '24'
+    - name: check node
+      run: node --version
