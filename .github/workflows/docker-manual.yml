@@ -27,3 +27,7 @@ jobs:
       - uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "./docker-compose-deploy.yml"
+      - name: get dependencies for tests
+        run: sudo apt-get install xvfb
+      - name: run the nightwatch tests
+        run: xvfb-run --auto-servernum npm test -- --env chrome
