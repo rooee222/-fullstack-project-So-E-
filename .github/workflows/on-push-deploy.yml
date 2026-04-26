@@ -1,0 +1,14 @@
+name: On push to deploy branch
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send message
+      run: echo "The deploy branch has been updated"
