@@ -1,4 +1,3 @@
-//- Edit listing form with category dropdown : Muna
 extends layout
 block content
     h1.page-title Edit Listing
@@ -28,6 +27,68 @@ block content
                 if listing.imageURL
                     p(style='margin-top: 8px; color: #777;') Current image:
                     img(src=listing.imageURL style='max-width: 200px; border-radius: 6px; margin-top: 5px;')
+            .form-group
+                label Pickup Location (postcode or address)
+                input(type='text' name='location' id='locationInput' value=listing.location placeholder='e.g. SW15 5PU or Roehampton Lane, London')
+                input(type='hidden' name='latitude' id='latInput' value=listing.latitude)
+                input(type='hidden' name='longitude' id='lngInput' value=listing.longitude)
+                #locationPreview(style='margin-top: 10px; color: #777; font-size: 0.9em;')
+                button.btn.btn-grey.btn-small(type='button' onclick='findLocation()' style='margin-top: 8px;') Find on Map
+                link(rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css')
+                #mapPreview(style='width: 100%; height: 250px; border-radius: 10px; margin-top: 10px; display: none;')
             button.btn.btn-green(type='submit') Update Listing
         br
         a(href='/my-listings') Cancel
+
+    script(src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js')
+    script.
+        var previewMap = null;
+        var previewMarker = null;
+        var existingLat = '#{listing.latitude}';
+        var existingLng = '#{listing.longitude}';
+        if (existingLat && existingLng && existingLat !== 'null') {
+            window.addEventListener('load', function() {
+                var lat = parseFloat(existingLat);
+                var lng = parseFloat(existingLng);
+                var mapDiv = document.getElementById('mapPreview');
+                mapDiv.style.display = 'block';
+                previewMap = L.map('mapPreview').setView([lat, lng], 14);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(previewMap);
+                previewMarker = L.marker([lat, lng]).addTo(previewMap);
+            });
+        }
+        function findLocation() {
+            var address = document.getElementById('locationInput').value;
+            if (!address) {
+                document.getElementById('locationPreview').innerText = 'Please enter a postcode or address';
+                return;
+            }
+            document.getElementById('locationPreview').innerText = 'Searching...';
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    if (data.length > 0) {
+                        var lat = parseFloat(data[0].lat);
+                        var lng = parseFloat(data[0].lon);
+                        document.getElementById('latInput').value = lat;
+                        document.getElementById('lngInput').value = lng;
+                        document.getElementById('locationPreview').innerText = '✓ Found: ' + data[0].display_name;
+                        var mapDiv = document.getElementById('mapPreview');
+                        mapDiv.style.display = 'block';
+                        if (previewMap) {
+                            previewMap.setView([lat, lng], 14);
+                            previewMarker.setLatLng([lat, lng]);
+                        } else {
+                            previewMap = L.map('mapPreview').setView([lat, lng], 14);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '© OpenStreetMap'
+                            }).addTo(previewMap);
+                            previewMarker = L.marker([lat, lng]).addTo(previewMap);
+                        }
+                    } else {
+                        document.getElementById('locationPreview').innerText = 'Location not found. Try a different postcode or address.';
+                    }
+                });
+        }

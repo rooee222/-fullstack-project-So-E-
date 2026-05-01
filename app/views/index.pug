@@ -10,3 +10,20 @@ block content
             else
                 a.btn-white(href='/login') Login
                 a.btn-outline(href='/register') Register
+
+    if session && session.loggedIn && recommendations && recommendations.length > 0
+        h2.page-title Recommended for You
+        .cards-grid
+            each item in recommendations
+                .card
+                    if item.imageURL
+                        img(src=item.imageURL alt=item.title)
+                    else
+                        .no-image No Image
+                    .card-body
+                        h3
+                            a(href='/listings/' + item.listingID) #{item.title}
+                        span.category-badge #{item.category}
+                        if item.avgRating
+                            span.rating-badge #{parseFloat(item.avgRating).toFixed(1)} ★
+                        .card-meta Posted by #{item.username}

@@ -1,4 +1,3 @@
-//- Login page with authentication 
 extends layout
 block content
     .auth-container
@@ -12,6 +11,8 @@ block content
                     label Password
                     input(type='password' name='password' placeholder='Enter password' required)
                 button.btn.btn-green(type='submit') Sign In
+            .auth-link
+                a(href='/forgot-password') Forgot Password?
             .auth-link
                 | Don't have an account? 
                 a(href='/register') Register

@@ -1,0 +1,28 @@
+extends layout
+block content
+    h1.page-title Community Leaderboard
+
+    if leaderboard.length === 0
+        p No users yet.
+    else
+        table.styled-table
+            thead
+                tr
+                    th Rank
+                    th Username
+                    th Points
+            tbody
+                each user, index in leaderboard
+                    tr
+                        td
+                            if index === 0
+                                | 1
+                            else if index === 1
+                                | 2
+                            else if index === 2
+                                | 3
+                            else
+                                | #{index + 1}
+                        td
+                            a(href='/users/' + user.userID) #{user.username}
+                        td #{user.points} pts

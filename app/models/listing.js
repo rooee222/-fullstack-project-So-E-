@@ -9,6 +9,9 @@ class Listing {
     status;
     userID;
     username;
+    location;
+    latitude;
+    longitude;
     createdAt;
 
     constructor(id) {
@@ -26,6 +29,9 @@ class Listing {
             this.status = result[0].status;
             this.userID = result[0].userID;
             this.username = result[0].username;
+            this.location = result[0].location;
+            this.latitude = result[0].latitude;
+            this.longitude = result[0].longitude;
             this.createdAt = result[0].createdAt;
         }
     }
@@ -45,9 +51,9 @@ class Listing {
         return await db.query(sql, params);
     }
 
-    static async createListing(title, description, category, userID, imageURL) {
-        var sql = "INSERT INTO listings (title, description, category, status, userID, imageURL) VALUES (?, ?, ?, 'active', ?, ?)";
-        const result = await db.query(sql, [title, description, category, userID, imageURL]);
+    static async createListing(title, description, category, userID, imageURL, location, latitude, longitude) {
+        var sql = "INSERT INTO listings (title, description, category, status, userID, imageURL, location, latitude, longitude) VALUES (?, ?, ?, 'active', ?, ?, ?, ?, ?)";
+        const result = await db.query(sql, [title, description, category, userID, imageURL, location, latitude, longitude]);
         return result.insertId;
     }
 }

@@ -11,10 +11,14 @@ html
             .nav-links
                 a(href='/listings') Browse Listings
                 a(href='/users') Users
+                a(href='/leaderboard') Leaderboard
                 if session && session.loggedIn
                     a.btn-primary(href='/listings/new') Post a Listing
                     a(href='/my-listings') My Listings
                     a(href='/messages') Messages
+                    a(href='/profile/edit') My Profile
+                    if session.isAdmin
+                        a(href='/admin' style='color: #e74c3c; font-weight: 600;') Admin
                     a(href='/logout') Logout
                 else
                     a(href='/login') Login

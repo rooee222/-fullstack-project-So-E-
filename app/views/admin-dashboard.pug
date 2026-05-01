@@ -1,0 +1,84 @@
+extends layout
+block content
+    h1.page-title Admin Dashboard
+
+    if query && query.listingRemoved
+        .alert.alert-success Listing has been removed.
+
+    h2(style='margin-bottom: 15px;') Reported Listings
+    if reports.length === 0
+        p No reports yet.
+    else
+        table.styled-table
+            thead
+                tr
+                    th Listing
+                    th Reported By
+                    th Reason
+                    th Status
+                    th Date
+                    th Actions
+            tbody
+                each report in reports
+                    tr
+                        td
+                            a(href='/listings/' + report.listingID) #{report.listingTitle}
+                        td #{report.reporterName}
+                        td #{report.reason}
+                        td
+                            if report.status === 'pending'
+                                span(style='color: #e67e22; font-weight: 600;') Pending
+                            else if report.status === 'reviewed'
+                                span(style='color: #3498db; font-weight: 600;') Reviewed
+                            else
+                                span(style='color: #2ecc71; font-weight: 600;') Resolved
+                        td #{new Date(report.createdAt).toLocaleDateString()}
+                        td
+                            form(action='/admin/report/' + report.reportID + '/status' method='POST' style='display: inline;')
+                                select(name='status')
+                                    option(value='pending') Pending
+                                    option(value='reviewed') Reviewed
+                                    option(value='resolved') Resolved
+                                button.btn.btn-green.btn-small(type='submit') Update
+                            |  
+                            form(action='/admin/remove-listing/' + report.listingID method='POST' style='display: inline;' onsubmit='return confirm("Delete this listing permanently?");')
+                                button.btn.btn-red.btn-small(type='submit') Remove Listing
+
+    h2(style='margin: 30px 0 15px;') All Users
+    if users.length === 0
+        p No users found.
+    else
+        table.styled-table
+            thead
+                tr
+                    th Username
+                    th Email
+                    th Points
+                    th Listings
+                    th Reports Filed
+                    th Status
+                    th Actions
+            tbody
+                each user in users
+                    tr
+                        td
+                            a(href='/users/' + user.userID) #{user.username}
+                        td #{user.email}
+                        td #{user.points || 0}
+                        td #{user.listingCount}
+                        td #{user.reportCount}
+                        td
+                            if user.isBanned
+                                span(style='color: #e74c3c; font-weight: 600;') Banned
+                            else if user.isAdmin
+                                span(style='color: #2ecc71; font-weight: 600;') Admin
+                            else
+                                span(style='color: #333;') Active
+                        td
+                            if !user.isAdmin
+                                if user.isBanned
+                                    form(action='/admin/unban/' + user.userID method='POST' style='display: inline;')
+                                        button.btn.btn-green.btn-small(type='submit') Unban
+                                else
+                                    form(action='/admin/ban/' + user.userID method='POST' style='display: inline;' onsubmit='return confirm("Ban this user?");')
+                                        button.btn.btn-red.btn-small(type='submit') Ban
